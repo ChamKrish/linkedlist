@@ -1,23 +1,24 @@
 public class LinkedList {
-	list head;
+	Node head;
 	
 //	inserting data
 	void insert(int d) {
-		list temp = new list();
+		Node temp = new Node();
 		temp.data = d;
 		if(head == null)
 			head = temp;
 		else {
-			list curr = head;
+			Node curr = head;
 			while(curr.next != null)
 				curr = curr.next;
 			curr.next = temp;
+			
 		}
 	}
 	
 //	returns the size of the linkedlist
 	int size() {
-		list temp = head;
+		Node temp = head;
 		int n=0;
 		while(temp != null) {
 			temp = temp.next;
@@ -28,14 +29,14 @@ public class LinkedList {
 	
 //	inserting data in specified pos
 	void insert(int pos, int key) {
-		list temp = new list();
+		Node temp = new Node();
 		temp.data = key;
 		if(pos == 0) {
 			temp.next = head;
 			head = temp;
 		}
 		else {
-		list curr = head;
+		Node curr = head;
 		for(int i=0; i<pos; i++) {
 			curr = curr.next;
 		}
@@ -58,7 +59,7 @@ public class LinkedList {
 	
 //	printing the linkedlist
 	void print() {
-		list temp = head;
+		Node temp = head;
 		while(temp!=null) {
 			System.out.println(temp.data);
 			temp = temp.next;
@@ -68,7 +69,7 @@ public class LinkedList {
 //	search a key
 	int search(int key) {
 		int pos = 0;
-		list temp = head;
+		Node temp = head;
 		while(temp != null) {
 			if(temp.data == key) return pos;
 			else 
@@ -83,7 +84,7 @@ public class LinkedList {
 //	deleting a key
 	void delete(int key) {
 		int pos = search(key);
-		list curr = head;
+		Node curr = head;
 		if (pos == 0) {
 			head = curr.next;
 			curr.next = null;
@@ -92,17 +93,27 @@ public class LinkedList {
 			for(int i=0;i<pos-1;i++) {
 				curr = curr.next;
 			}
-			list temp = curr.next;
+			Node temp = curr.next;
 			curr.next = temp.next;
 			temp.next = null;
 		}
+	}
+	
+//	middle element of a linkedlist
+	int middle_element() {
+		Node temp = head;
+		int s = size();
+		while(search(temp.data) < s/2) {
+			temp = temp.next;
+		}
+		return temp.data;
 	}
 	
 //	Stack implementation with linked list
 	
 //	pushing a value into stack
 	void insertfirst(int key) {
-		list temp = new list();
+		Node temp = new Node();
 		temp.data = key;
 		temp.next = head;
 		head = temp;
@@ -110,7 +121,7 @@ public class LinkedList {
 	
 //	poping from stack
 	void deletefirst() {
-		list temp = head;
+		Node temp = head;
 		head = head.next;
 		temp.next = null;
 	}
